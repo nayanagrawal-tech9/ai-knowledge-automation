@@ -1,0 +1,37 @@
+{
+  "name": "ai-knowledge-automation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:auth": "playwright test tests/auth/",
+    "test:auth:headed": "playwright test tests/auth/ --headed",
+    "report": "playwright show-report",
+    "test:install": "playwright install",
+    "test:install-deps": "playwright install-deps"
+  },
+  "keywords": [
+    "playwright",
+    "e2e",
+    "testing",
+    "automation",
+    "sso",
+    "oauth"
+  ],
+  "author": "",
+  "license": "ISC",
+  "description": "E2E test automation for AI Knowledge Chat UI with Gmail SSO",
+  "devDependencies": {
+    "@playwright/test": "^1.55.1",
+    "@types/dotenv": "^6.1.1",
+    "@types/node": "^24.5.2",
+    "dotenv": "^17.2.2"
+  },
+  "dependencies": {
+    "playwright-extra": "^4.3.6",
+    "playwright-extra-plugin-stealth": "^0.0.1"
+  }
+}

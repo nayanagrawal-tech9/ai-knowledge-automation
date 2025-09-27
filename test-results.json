@@ -1,0 +1,217 @@
+{
+  "config": {
+    "configFile": "/Users/nayanagrawal/Downloads/Tech9Hackathon/ai-knowledge-automation/playwright.config.ts",
+    "rootDir": "/Users/nayanagrawal/Downloads/Tech9Hackathon/ai-knowledge-automation/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/Users/nayanagrawal/Downloads/Tech9Hackathon/ai-knowledge-automation/src/utils/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/nayanagrawal/Downloads/Tech9Hackathon/ai-knowledge-automation/test-results",
+        "repeatEach": 1,
+        "retries": 1,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/nayanagrawal/Downloads/Tech9Hackathon/ai-knowledge-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "auth/weather-query.spec.ts",
+      "file": "auth/weather-query.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Weather Query Test After Login",
+          "file": "auth/weather-query.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "@weather-query User login and ask weather question",
+              "ok": true,
+              "tags": [
+                "weather-query"
+              ],
+              "tests": [
+                {
+                  "timeout": 120000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 43863,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "🚀 Starting comprehensive test: Login + Weather Query\n"
+                        },
+                        {
+                          "text": "📍 PHASE 1: Complete Gmail SSO Login\n"
+                        },
+                        {
+                          "text": "📍 Step 1: Navigate to login page\n"
+                        },
+                        {
+                          "text": "✅ Reached Google OAuth page\n"
+                        },
+                        {
+                          "text": "📍 Step 2: Enter credentials\n"
+                        },
+                        {
+                          "text": "✅ Login credentials submitted\n"
+                        },
+                        {
+                          "text": "📍 Step 3: Waiting for home page...\n"
+                        },
+                        {
+                          "text": "🔄 On callback page, waiting for redirect to home...\n"
+                        },
+                        {
+                          "text": "✅ Successfully logged in and reached home page\n"
+                        },
+                        {
+                          "text": "🏠 Home page URL: https://ai-knowledge-chat-ui.vercel.app/home\n"
+                        },
+                        {
+                          "text": "\n📍 PHASE 2: Weather Query Interaction\n"
+                        },
+                        {
+                          "text": "📍 Step 4: Looking for input field...\n"
+                        },
+                        {
+                          "text": "✅ Input field found\n"
+                        },
+                        {
+                          "text": "📍 Step 5: Enter weather query\n"
+                        },
+                        {
+                          "text": "✅ Entered query: \"what is the weather in Delhi\"\n"
+                        },
+                        {
+                          "text": "📍 Step 6: Looking for send button...\n"
+                        },
+                        {
+                          "text": "✅ Send button found\n"
+                        },
+                        {
+                          "text": "✅ Send button clicked\n"
+                        },
+                        {
+                          "text": "📍 Step 7: Waiting for weather response...\n"
+                        },
+                        {
+                          "text": "✅ Response area found\n"
+                        },
+                        {
+                          "text": "📝 Weather response received: The weather in Delhi is currently hazy with a temperature of 29°C. However, due to the humidity level of 74%, it might feel a bit warmer, around 34°C. The wind is barely noticeable, blowing at a speed of just 1 km/h. Despite the haze, the temperature is quite comfortable, but the high humidity might make the air feel a bit heavy. It's a good idea to stay hydrated and maybe stay indoors until the haze clears up.\n"
+                        },
+                        {
+                          "text": "✅ Response validation passed\n"
+                        },
+                        {
+                          "text": "\n🌤️  ========================\n"
+                        },
+                        {
+                          "text": "🌤️  WEATHER RESPONSE\n"
+                        },
+                        {
+                          "text": "🌤️  ========================\n"
+                        },
+                        {
+                          "text": "The weather in Delhi is currently hazy with a temperature of 29°C. However, due to the humidity level of 74%, it might feel a bit warmer, around 34°C. The wind is barely noticeable, blowing at a speed of just 1 km/h. Despite the haze, the temperature is quite comfortable, but the high humidity might make the air feel a bit heavy. It's a good idea to stay hydrated and maybe stay indoors until the haze clears up.\n"
+                        },
+                        {
+                          "text": "🌤️  ========================\n\n"
+                        },
+                        {
+                          "text": "🎉 Weather query test completed successfully!\n"
+                        },
+                        {
+                          "text": "✅ Complete flow: Login → Home → Weather Query → Response ✅\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-27T21:16:48.634Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "3c3361e8367992936536-44206da56baae3abe8c9",
+              "file": "auth/weather-query.spec.ts",
+              "line": 4,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-09-27T21:16:48.275Z",
+    "duration": 46381.159,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
