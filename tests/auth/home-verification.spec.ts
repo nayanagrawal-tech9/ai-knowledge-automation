@@ -1,6 +1,18 @@
 import { test, expect } from '../../src/fixtures/test-fixtures';
+import { getTestCredentials } from '../../src/config/credentials';
+import { allure } from 'allure-playwright';
 
 test.describe('Home Page Navigation Verification', () => {
+  test.beforeEach(async () => {
+    await allure.epic('Authentication');
+    await allure.feature('Home Page Verification');
+    await allure.story('Post-Login Navigation Validation');
+    await allure.owner('QA Team');
+    await allure.severity('normal');
+    await allure.tag('smoke');
+    await allure.tag('navigation');
+    await allure.tag('verification');
+  });
   test('@home-verification Gmail SSO login and home page verification', async ({ 
     loginPage, 
     googleOAuthPage, 
@@ -10,8 +22,7 @@ test.describe('Home Page Navigation Verification', () => {
     // Set longer timeout for authentication
     test.setTimeout(60000);
 
-    const testEmail = 'nayanlnct@gmail.com';
-    const testPassword = '942517502';
+    const credentials = getTestCredentials();
 
     console.log('🏠 Starting Gmail SSO login with home page verification...');
 
@@ -25,7 +36,7 @@ test.describe('Home Page Navigation Verification', () => {
 
       // Step 2: Enter credentials
       console.log('📍 Step 2: Enter email and password');
-      await googleOAuthPage.enterEmail(testEmail);
+      await googleOAuthPage.enterEmail(credentials.email);
       await googleOAuthPage.clickNext();
       
       // Wait for password field
@@ -34,7 +45,7 @@ test.describe('Home Page Navigation Verification', () => {
         state: 'visible' 
       });
       
-      await googleOAuthPage.enterPassword(testPassword);
+      await googleOAuthPage.enterPassword(credentials.password);
       await googleOAuthPage.clickNext();
       console.log('✅ Credentials entered');
 

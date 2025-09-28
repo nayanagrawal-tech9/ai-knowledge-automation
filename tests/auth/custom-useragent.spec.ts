@@ -1,4 +1,5 @@
 import { test, expect } from '../../src/fixtures/test-fixtures';
+import { getTestCredentials } from '../../src/config/credentials';
 
 test.describe('Gmail SSO with Custom User Agent', () => {
   test('@useragent Gmail SSO with custom user agent', async ({ browser }) => {
@@ -47,8 +48,7 @@ test.describe('Gmail SSO with Custom User Agent', () => {
 
     console.log('🚀 Starting Gmail SSO test with custom user agent...');
 
-    const testEmail = 'nayanlnct@gmail.com';
-    const testPassword = '942517502';
+    const credentials = getTestCredentials();
 
     try {
       console.log('📍 Step 1: Navigate to login page');
@@ -65,7 +65,7 @@ test.describe('Gmail SSO with Custom User Agent', () => {
       // Wait for email input and enter email
       console.log('📍 Step 2: Enter email');
       await page.waitForSelector('input[type="email"], input[name="identifier"]', { timeout: 10000 });
-      await page.fill('input[type="email"], input[name="identifier"]', testEmail);
+      await page.fill('input[type="email"], input[name="identifier"]', credentials.email);
       
       // Click Next button
       await page.click('button:has-text("Next"), #identifierNext');
@@ -79,7 +79,7 @@ test.describe('Gmail SSO with Custom User Agent', () => {
         
         // Wait for password field
         await page.waitForSelector('input[type="password"]:visible, input[name="Passwd"]', { timeout: 15000 });
-        await page.fill('input[type="password"]:visible, input[name="Passwd"]', testPassword);
+        await page.fill('input[type="password"]:visible, input[name="Passwd"]', credentials.password);
         
         // Click Next
         await page.click('button:has-text("Next")');

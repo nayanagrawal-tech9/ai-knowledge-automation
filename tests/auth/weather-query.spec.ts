@@ -1,6 +1,18 @@
 import { test, expect } from '../../src/fixtures/test-fixtures';
+import { getTestCredentials, getAppUrls } from '../../src/config/credentials';
+import { allure } from 'allure-playwright';
 
 test.describe('Weather Query Test After Login', () => {
+  test.beforeEach(async () => {
+    await allure.epic('Authentication & Features');
+    await allure.feature('Weather Query Integration');
+    await allure.story('End-to-End Login and Weather Query');
+    await allure.owner('QA Team');
+    await allure.severity('critical');
+    await allure.tag('e2e');
+    await allure.tag('weather');
+    await allure.tag('integration');
+  });
   test('@weather-query User login and ask weather question', async ({ 
     loginPage, 
     googleOAuthPage, 
@@ -9,41 +21,61 @@ test.describe('Weather Query Test After Login', () => {
     // Set longer timeout for this comprehensive test
     test.setTimeout(120000); // 2 minutes
 
-    const testEmail = 'nayanlnct@gmail.com';
-    const testPassword = 'nayan@5555';
+    // Set test metadata
+    await allure.description('Complete end-to-end test: Gmail SSO login followed by weather query functionality');
+    await allure.link('https://ai-knowledge-chat-ui.vercel.app/login', 'Test Application');
+
+    // Get credentials from centralized config
+    const credentials = getTestCredentials();
     const weatherQuery = 'what is the weather in Delhi';
+
+    await allure.parameter('Weather Query', weatherQuery);
+    await allure.parameter('Test Email', credentials.email);
 
     console.log('🚀 Starting comprehensive test: Login + Weather Query');
 
-    // Step 1: Complete Login Flow
-    console.log('📍 PHASE 1: Complete Gmail SSO Login');
-    console.log('📍 Step 1: Navigate to login page');
-    await loginPage.navigateToLogin();
-    await loginPage.clickSignInWithSSO();
-    await googleOAuthPage.waitForGoogleOAuthPageLoad();
-    console.log('✅ Reached Google OAuth page');
+    await allure.step('PHASE 1: Complete Gmail SSO Login', async () => {
+      console.log('📍 PHASE 1: Complete Gmail SSO Login');
+      
+      await allure.step('Navigate to login page and initiate SSO', async () => {
+        console.log('📍 Step 1: Navigate to login page');
+        await loginPage.navigateToLogin();
+        await loginPage.clickSignInWithSSO();
+        await googleOAuthPage.waitForGoogleOAuthPageLoad();
+        console.log('✅ Reached Google OAuth page');
+        
+        const screenshot = await page.screenshot({ fullPage: true });
+        await allure.attachment('Google OAuth Page', screenshot, 'image/png');
+      });
 
-    // Login process
-    console.log('📍 Step 2: Enter credentials');
-    await googleOAuthPage.enterEmail(testEmail);
-    await googleOAuthPage.clickNext();
-    
-    await page.waitForTimeout(3000);
-    await page.waitForSelector('input[name="Passwd"], input[type="password"]:visible', { 
-      timeout: 15000,
-      state: 'visible' 
+      await allure.step('Enter Gmail credentials and authenticate', async () => {
+        console.log('📍 Step 2: Enter credentials');
+        await googleOAuthPage.enterEmail(credentials.email);
+        await googleOAuthPage.clickNext();
+        
+        await page.waitForTimeout(3000);
+        await page.waitForSelector('input[name="Passwd"], input[type="password"]:visible', { 
+          timeout: 15000,
+          state: 'visible' 
+        });
+        
+        await googleOAuthPage.enterPassword(credentials.password);
+        
+        const screenshot = await page.screenshot({ fullPage: true });
+        await allure.attachment('After Credentials Entry', screenshot, 'image/png');
+      });
+
+      await allure.step('Submit authentication and wait for redirect', async () => {
+        // Click Next button after password
+        const nextButtonAfterPassword = page.getByRole('button', { name: 'Next' }).first();
+        await nextButtonAfterPassword.waitFor({ state: 'visible', timeout: 10000 });
+        await nextButtonAfterPassword.click();
+        console.log('✅ Login credentials submitted');
+
+        // Wait for redirect to home page
+        console.log('📍 Step 3: Waiting for home page...');
+      });
     });
-    
-    await googleOAuthPage.enterPassword(testPassword);
-    
-    // Click Next button after password
-    const nextButtonAfterPassword = page.getByRole('button', { name: 'Next' }).first();
-    await nextButtonAfterPassword.waitFor({ state: 'visible', timeout: 10000 });
-    await nextButtonAfterPassword.click();
-    console.log('✅ Login credentials submitted');
-
-    // Wait for redirect to home page
-    console.log('📍 Step 3: Waiting for home page...');
     await page.waitForFunction(
       () => {
         const url = window.location.href;

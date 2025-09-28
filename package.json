@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
+    "test": "npm run allure:clean && playwright test",
+    "test:headed": "npm run allure:clean && playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:ui": "playwright test --ui",
-    "test:auth": "playwright test tests/auth/",
-    "test:auth:headed": "playwright test tests/auth/ --headed",
+    "test:auth": "npm run allure:clean && playwright test tests/auth/",
+    "test:auth:headed": "npm run allure:clean && playwright test tests/auth/ --headed",
+    "test:allure": "npm run allure:clean && playwright test tests/auth/login.spec.ts --grep=\"should complete Gmail SSO login successfully\"",
+    "test:allure:headed": "npm run allure:clean && playwright test tests/auth/login.spec.ts --grep=\"should complete Gmail SSO login successfully\" --headed",
     "report": "playwright show-report",
+    "allure:clean": "node scripts/cleanup-allure.js",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:serve": "npm run allure:generate && allure serve allure-results",
+    "allure:open": "allure open allure-report",
+    "allure:fresh": "npm run allure:clean && npm run test:allure && npm run allure:serve",
     "test:install": "playwright install",
     "test:install-deps": "playwright install-deps"
   },
@@ -28,6 +35,7 @@
     "@playwright/test": "^1.55.1",
     "@types/dotenv": "^6.1.1",
     "@types/node": "^24.5.2",
+    "allure-playwright": "^3.4.1",
     "dotenv": "^17.2.2"
   },
   "dependencies": {

@@ -7,11 +7,24 @@ async function globalSetup(config: FullConfig) {
   console.log('🌐 Base URL:', process.env.BASE_URL || 'https://ai-knowledge-chat-ui.vercel.app');
   console.log('👥 Workers:', config.workers);
   
+  // Clean up previous Allure reports and results
+  console.log('🧹 Cleaning up previous Allure data...');
+  const allureDirectories = ['allure-results', 'allure-report'];
+  
+  allureDirectories.forEach(dir => {
+    const dirPath = path.resolve(dir);
+    if (fs.existsSync(dirPath)) {
+      fs.rmSync(dirPath, { recursive: true, force: true });
+      console.log(`🗑️  Removed: ${dir}`);
+    }
+  });
+  
   // Create directories for test artifacts
   const directories = [
     'test-results',
     'playwright-report',
-    'screenshots'
+    'screenshots',
+    'allure-results'
   ];
 
   directories.forEach(dir => {

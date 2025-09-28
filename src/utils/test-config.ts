@@ -1,15 +1,12 @@
 import { TestData, AppUrls, TestConfig } from '../types';
 import { EnvUtils } from '../utils';
+import { getTestCredentials } from '../config/credentials';
 
 /**
  * Test data configuration
  */
 export const testData: TestData = {
-  validUser: {
-    email: EnvUtils.get('TEST_EMAIL', 'your-test-email@gmail.com'),
-    password: EnvUtils.get('TEST_PASSWORD', 'your-test-password'),
-    displayName: 'Test User'
-  },
+  validUser: getTestCredentials(),
   invalidUser: {
     email: 'invalid@example.com',
     password: 'wrongpassword',

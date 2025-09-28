@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage, GoogleOAuthPage, HomePage } from '../../src/pages';
+import { getTestCredentials } from '../../src/config/credentials';
 
 test.describe('Gmail SSO Simple Test', () => {
   test('@simple Gmail SSO login test', async ({ page }) => {
@@ -10,8 +11,7 @@ test.describe('Gmail SSO Simple Test', () => {
     const googleOAuthPage = new GoogleOAuthPage(page);
     const homePage = new HomePage(page);
 
-    const testEmail = 'nayanlnct@gmail.com';
-    const testPassword = '942517502';
+    const credentials = getTestCredentials();
 
     console.log('📍 Step 1: Navigate to login page');
     await loginPage.navigateToLogin();
@@ -20,7 +20,7 @@ test.describe('Gmail SSO Simple Test', () => {
     console.log('✅ Reached Google OAuth page');
 
     console.log('📍 Step 2: Enter email');
-    await googleOAuthPage.enterEmail(testEmail);
+    await googleOAuthPage.enterEmail(credentials.email);
     await googleOAuthPage.clickNext();
     
     console.log('✅ Email submitted');
@@ -34,7 +34,7 @@ test.describe('Gmail SSO Simple Test', () => {
       
       try {
         await googleOAuthPage.waitForElement(googleOAuthPage.passwordInputElement, 15000);
-        await googleOAuthPage.enterPassword(testPassword);
+        await googleOAuthPage.enterPassword(credentials.password);
         await googleOAuthPage.clickNext();
         
         console.log('✅ Password submitted');
