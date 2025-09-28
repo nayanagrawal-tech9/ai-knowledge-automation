@@ -1,0 +1,436 @@
+# AI Knowledge Chat UI - Manual Test Cases
+# Generated: November 28, 2025
+# Project: Gmail SSO Authentication & AI Chat Interface
+
+Test Case ID,Test Suite,Test Case Name,Priority,Test Description,Pre-conditions,Test Steps,Expected Results,Post-conditions,Test Data,Browser Support,Device Type,Estimation (mins)
+TC_AUTH_001,Authentication,Login Page Display,High,"Verify that the login page displays correctly with all required elements","1. Application is deployed and accessible
+2. Browser is opened
+3. No active user session","1. Navigate to the application URL (https://ai-knowledge-chat-ui.vercel.app)
+2. Verify page loads without errors
+3. Check all UI elements are visible","1. Login page loads successfully
+2. Logo is displayed (Universal Knowledge Chatbot)
+3. Title ""Universal Knowledge Chatbot"" is visible
+4. Subtitle ""Sign in to your account using your organization's SSO"" is displayed
+5. ""Sign in with SSO"" button is present and enabled
+6. Footer text ""Secure login powered by Auth0"" is visible
+7. Login icon is displayed
+8. Page is responsive and properly styled","User is on login page ready to authenticate","URL: https://ai-knowledge-chat-ui.vercel.app","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_AUTH_002,Authentication,SSO Button Click Redirect,High,"Verify clicking SSO button redirects to Google OAuth","1. User is on login page
+2. SSO button is visible and enabled","1. Click on ""Sign in with SSO"" button
+2. Wait for redirect to occur
+3. Verify redirection happens","1. Page redirects to Google OAuth login page
+2. URL contains google accounts domain
+3. OAuth page loads without errors
+4. Google login form is displayed","User is redirected to Google OAuth page","Valid SSO configuration","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",3
+
+TC_AUTH_003,Authentication,Google OAuth Login Success,Critical,"Complete Gmail SSO login flow successfully","1. User is redirected to Google OAuth page
+2. Valid Gmail credentials are available
+3. Account has access to the application","1. Enter valid Gmail email address
+2. Click Next or Continue
+3. Enter valid password
+4. Click Sign In
+5. Complete any 2FA if required
+6. Wait for callback and redirect","1. Email field accepts valid email
+2. Password field accepts input (masked)
+3. Login process completes without errors
+4. User is redirected back to application
+5. Homepage/chat interface is displayed
+6. User information is visible in UI","User is successfully authenticated and on homepage","Email: valid Gmail account
+Password: valid password","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",10
+
+TC_AUTH_004,Authentication,Invalid Email Handling,Medium,"Test behavior with invalid email during OAuth","1. User is on Google OAuth page","1. Enter invalid email format (e.g., 'invalid-email')
+2. Click Next or Continue
+3. Observe behavior","1. Google displays appropriate error message
+2. User cannot proceed with invalid email
+3. Error message is clear and helpful","User remains on OAuth page with error displayed","Email: invalid@invalid, test123, @gmail.com","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_AUTH_005,Authentication,Wrong Password Handling,Medium,"Test behavior with wrong password during OAuth","1. User is on Google OAuth page
+2. Valid email has been entered","1. Enter correct email address
+2. Click Next
+3. Enter incorrect password
+4. Click Sign In
+5. Observe behavior","1. Google displays password error message
+2. User cannot proceed with wrong password
+3. User can retry with correct password
+4. No application errors occur","User can retry login with correct credentials","Email: valid Gmail
+Password: incorrect password","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_AUTH_006,Authentication,Authentication State Persistence,Medium,"Verify user session persists across browser refresh","1. User has successfully logged in
+2. User is on homepage/chat interface","1. Note current authentication state
+2. Refresh the browser page (F5 or Ctrl+R)
+3. Wait for page to reload
+4. Check authentication state","1. Page reloads successfully
+2. User remains authenticated
+3. Homepage/chat interface is displayed
+4. User information is still visible
+5. No re-authentication required","User session is maintained after refresh","Previously authenticated session","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",3
+
+TC_AUTH_007,Authentication,Logout Functionality,High,"Test user logout process","1. User is successfully authenticated
+2. User is on homepage/chat interface
+3. Logout option is visible","1. Locate logout button/option
+2. Click on logout button
+3. Confirm logout if prompted
+4. Wait for logout process","1. Logout process completes successfully
+2. User is redirected to login page
+3. Session is cleared
+4. Homepage is no longer accessible without login","User is logged out and redirected to login page","Authenticated user session","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",3
+
+TC_AUTH_008,Authentication,Unauthorized Access Prevention,High,"Verify direct URL access is blocked without authentication","1. User is not authenticated
+2. Browser has no active session","1. Directly navigate to homepage URL (/home)
+2. Try accessing protected routes
+3. Observe behavior","1. User is redirected to login page
+2. Protected content is not accessible
+3. Proper authentication flow is enforced","User must authenticate to access protected content","Protected URLs: /home, /chat","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_UI_001,User Interface,Homepage Layout Display,High,"Verify homepage displays correctly after authentication","1. User is successfully authenticated
+2. User has been redirected to homepage","1. Observe homepage layout
+2. Check all UI components
+3. Verify responsive design
+4. Test different screen sizes","1. Chat interface is displayed
+2. User profile information is visible
+3. Message input area is present
+4. Send button is available
+5. File upload option is visible
+6. Sidebar/navigation is present
+7. Layout is responsive across devices","Homepage is ready for user interaction","Authenticated user session","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",8
+
+TC_UI_002,User Interface,Chat Interface Elements,Medium,"Verify all chat interface elements are functional","1. User is on homepage/chat interface
+2. Chat area is visible","1. Check message input field
+2. Verify send button state
+3. Check file upload button
+4. Test input field placeholder text
+5. Verify character limits if any","1. Input field accepts text input
+2. Placeholder text: 'Ask about weather or upload a file for analysis'
+3. Send button is enabled/disabled appropriately
+4. File upload button is clickable
+5. All elements are properly styled","Chat interface is ready for use","Authenticated user session","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_UI_003,User Interface,Responsive Design Validation,Medium,"Test application responsiveness across different screen sizes","1. User is authenticated
+2. Application is loaded","1. Test on desktop (1920x1080)
+2. Test on tablet (768x1024)
+3. Test on mobile (375x667)
+4. Check landscape and portrait modes
+5. Verify element positioning","1. Layout adapts to different screen sizes
+2. All elements remain accessible
+3. Text is readable at all sizes
+4. Buttons are clickable on touch devices
+5. No horizontal scrolling on mobile","Application works across all device types","Various screen resolutions","Chrome, Firefox, Safari","Desktop, Mobile, Tablet",15
+
+TC_CHAT_001,Chat Functionality,Send Text Message,High,"Test sending a text message through chat interface","1. User is authenticated and on chat interface
+2. Chat input field is available","1. Type a test message in input field
+2. Click send button or press Enter
+3. Wait for response
+4. Observe message display","1. Message is sent successfully
+2. User message appears in chat area
+3. Bot response is received
+4. Both messages are properly formatted
+5. Timestamps are displayed","Chat conversation is active with message history","Message: 'Hello, how are you?'","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_CHAT_002,Chat Functionality,Empty Message Handling,Medium,"Test behavior when trying to send empty message","1. User is on chat interface
+2. Input field is empty","1. Leave input field empty
+2. Click send button
+3. Observe behavior","1. Empty message is not sent
+2. Send button may be disabled for empty input
+3. No error message is displayed
+4. Input field remains focused","No message is sent, system handles gracefully","Empty input","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",3
+
+TC_CHAT_003,Chat Functionality,Weather Query Functionality,High,"Test weather-related queries in chat","1. User is authenticated and on chat interface
+2. Weather service is configured","1. Type weather-related query
+2. Send message
+3. Wait for response
+4. Verify response content","1. Weather query is processed
+2. Relevant weather information is returned
+3. Response is formatted properly
+4. Location-based results if applicable","Weather information is displayed to user","Query: 'What is the weather today?'","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",8
+
+TC_FILE_001,File Upload,File Selection and Upload,High,"Test file upload functionality","1. User is authenticated and on chat interface
+2. File upload option is available","1. Click on file upload button
+2. Select a valid file (PDF, text, etc.)
+3. Confirm file selection
+4. Wait for upload to complete
+5. Observe upload status","1. File picker opens correctly
+2. File is selected successfully
+3. Upload progress is shown
+4. File upload completes without errors
+5. Upload confirmation is displayed
+6. File information is shown in chat","File is uploaded and ready for analysis","Valid files: test.pdf, document.txt","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",8
+
+TC_FILE_002,File Upload,Invalid File Type Handling,Medium,"Test behavior with unsupported file types","1. User is on chat interface
+2. File upload is available","1. Click file upload button
+2. Select unsupported file type (e.g., .exe, .zip)
+3. Attempt to upload
+4. Observe behavior","1. System rejects unsupported file type
+2. Clear error message is displayed
+3. Supported file types are indicated
+4. User can try again with valid file","Invalid file is rejected with helpful error message","Invalid files: malware.exe, large.zip","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",5
+
+TC_FILE_003,File Upload,File Size Limit Testing,Medium,"Test file upload with different file sizes","1. User is on chat interface
+2. Various file sizes are prepared","1. Upload small file (<1MB)
+2. Upload medium file (1-10MB)
+3. Upload large file (>10MB)
+4. Test maximum size limit
+5. Observe system behavior","1. Small files upload quickly
+2. Medium files upload with progress indicator
+3. Large files are handled appropriately
+4. Size limit errors are clear
+5. System remains stable","File size limits are enforced properly","Files: small.pdf (500KB), medium.pdf (5MB), large.pdf (50MB)","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",10
+
+TC_FILE_004,File Upload,File Analysis Request,High,"Test requesting analysis of uploaded file","1. File has been successfully uploaded
+2. File appears in chat interface","1. Type analysis request message
+2. Send message referencing uploaded file
+3. Wait for analysis response
+4. Review analysis results","1. System processes file analysis request
+2. Analysis results are returned
+3. Results are relevant to uploaded file
+4. Response is formatted clearly","File analysis is completed and displayed","Message: 'Analyze this document'","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",10
+
+TC_SEC_001,Security,Session Timeout Handling,Medium,"Test session timeout behavior","1. User is authenticated
+2. System has session timeout configured","1. Log in successfully
+2. Leave application idle for extended period
+3. Attempt to interact with interface
+4. Observe session handling","1. Session expires after timeout period
+2. User is redirected to login page
+3. Sensitive data is cleared
+4. Re-authentication is required","Session security is maintained","Idle time based on configuration","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",15
+
+TC_SEC_002,Security,XSS Protection,High,"Test application protection against XSS attacks","1. User is authenticated
+2. Chat interface is available","1. Enter script tags in message input
+2. Try JavaScript injection attempts
+3. Send malicious input
+4. Observe system behavior","1. Script tags are sanitized
+2. JavaScript is not executed
+3. Malicious input is handled safely
+4. Application remains secure","Application is protected against XSS","Malicious input: <script>alert('XSS')</script>","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",10
+
+TC_SEC_003,Security,CSRF Protection,High,"Test Cross-Site Request Forgery protection","1. User is authenticated
+2. External malicious site is prepared","1. Visit malicious site with CSRF attempt
+2. Try unauthorized actions
+3. Return to legitimate application
+4. Verify session integrity","1. CSRF attempts are blocked
+2. Session remains valid
+3. Unauthorized actions are prevented
+4. User data is protected","CSRF protection is effective","Simulated CSRF attack","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",15
+
+TC_PERF_001,Performance,Page Load Speed,Medium,"Measure application load times","1. Clear browser cache
+2. Stable internet connection","1. Navigate to application URL
+2. Measure time to fully load
+3. Test multiple times
+4. Record average load time
+5. Test from different locations","1. Login page loads within 3 seconds
+2. Homepage loads within 5 seconds
+3. Load times are consistent
+4. No performance degradation over time","Performance benchmarks are met","Network: High-speed broadband","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",20
+
+TC_PERF_002,Performance,Chat Response Time,Medium,"Test chat response speed","1. User is authenticated
+2. Chat interface is ready","1. Send various types of messages
+2. Measure response times
+3. Test during peak and off-peak
+4. Record performance metrics","1. Text responses within 2 seconds
+2. File analysis within 10 seconds
+3. Weather queries within 5 seconds
+4. System remains responsive","Chat performance meets SLA requirements","Various message types","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",25
+
+TC_PERF_003,Performance,Concurrent User Handling,High,"Test application with multiple simultaneous users","1. Multiple test accounts available
+2. Load testing tools configured","1. Simulate multiple concurrent logins
+2. Have users perform various actions
+3. Monitor system performance
+4. Check for degradation","1. System handles concurrent users
+2. Response times remain acceptable
+3. No user sessions interfere
+4. System stability is maintained","Multi-user performance is acceptable","Multiple test accounts","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",45
+
+TC_COMPAT_001,Compatibility,Browser Compatibility,High,"Test application across different browsers","1. Different browsers installed
+2. Same test scenarios prepared","1. Test core functionality in Chrome
+2. Test in Firefox
+3. Test in Safari
+4. Test in Edge
+5. Compare behavior","1. All browsers display UI correctly
+2. Authentication works in all browsers
+3. Chat functionality is consistent
+4. File upload works across browsers","Cross-browser compatibility is confirmed","All major browsers","Chrome, Firefox, Safari, Edge","Desktop",30
+
+TC_COMPAT_002,Compatibility,Mobile Browser Testing,High,"Test application on mobile browsers","1. Mobile devices or emulators available
+2. Various mobile browsers installed","1. Test on Chrome mobile
+2. Test on Safari mobile
+3. Test on Samsung Internet
+4. Test on Firefox mobile
+5. Verify touch interactions","1. Mobile interface is usable
+2. Touch targets are appropriate size
+3. Scrolling works properly
+4. Mobile-specific features work","Mobile compatibility is ensured","Mobile browsers","Chrome Mobile, Safari Mobile, Samsung Internet","Mobile, Tablet",25
+
+TC_COMPAT_003,Compatibility,Operating System Testing,Medium,"Test application across different operating systems","1. Access to different OS platforms
+2. Consistent test environment","1. Test on Windows
+2. Test on macOS
+3. Test on Linux
+4. Test on iOS
+5. Test on Android","1. Application works on all OS platforms
+2. No OS-specific issues occur
+3. Performance is consistent
+4. All features are available","Cross-platform compatibility is verified","Windows, macOS, Linux, iOS, Android","All browsers","Desktop, Mobile, Tablet",40
+
+TC_ACCESS_001,Accessibility,Keyboard Navigation,High,"Test application accessibility using keyboard only","1. User has physical or preference need for keyboard navigation
+2. Mouse/trackpad is disabled","1. Navigate using Tab key
+2. Test Shift+Tab for reverse navigation
+3. Use Enter/Space for activation
+4. Test Escape key functionality
+5. Verify focus indicators","1. All interactive elements are reachable
+2. Tab order is logical
+3. Focus indicators are visible
+4. Keyboard shortcuts work
+5. No keyboard traps exist","Application is fully keyboard accessible","Keyboard shortcuts list","Chrome, Firefox, Safari, Edge","Desktop",20
+
+TC_ACCESS_002,Accessibility,Screen Reader Compatibility,High,"Test application with screen readers","1. Screen reader software installed
+2. User familiar with screen reader usage","1. Navigate with screen reader active
+2. Test form field announcements
+3. Verify button and link descriptions
+4. Check heading structure
+5. Test dynamic content announcements","1. Screen reader announces all content
+2. Form fields have proper labels
+3. Buttons have descriptive text
+4. Heading hierarchy is logical
+5. Dynamic updates are announced","Application is screen reader accessible","NVDA, JAWS, VoiceOver","Chrome, Firefox, Safari, Edge","Desktop",30
+
+TC_ACCESS_003,Accessibility,Color Contrast and Visual,Medium,"Test visual accessibility features","1. Users with visual impairments
+2. Color contrast testing tools available","1. Check color contrast ratios
+2. Test with high contrast mode
+3. Verify text readability
+4. Test color-only information
+5. Check focus indicators","1. Color contrast meets WCAG standards
+2. High contrast mode works
+3. Text is readable at all sizes
+4. Information isn't color-dependent only
+5. Focus indicators are clear","Visual accessibility standards are met","WCAG 2.1 AA guidelines","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",15
+
+TC_ERROR_001,Error Handling,Network Connectivity Issues,High,"Test application behavior during network problems","1. User is authenticated
+2. Network controls available","1. Disconnect internet connection
+2. Try to send messages
+3. Reconnect internet
+4. Test partial connectivity
+5. Observe error handling","1. Offline status is indicated
+2. Error messages are helpful
+3. Actions retry when connection restored
+4. Data loss is prevented
+5. User is informed of status","Network issues are handled gracefully","Network simulation tools","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",15
+
+TC_ERROR_002,Error Handling,Server Error Responses,Medium,"Test handling of server-side errors","1. Server can be configured to return errors
+2. User is on application","1. Trigger 500 server error
+2. Trigger 404 not found
+3. Trigger authentication errors
+4. Test timeout scenarios
+5. Observe error handling","1. Error messages are user-friendly
+2. Technical details are hidden from users
+3. Recovery options are provided
+4. System remains stable
+5. Logging captures errors","Server errors are handled appropriately","Simulated server errors","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",20
+
+TC_ERROR_003,Error Handling,Input Validation Errors,Medium,"Test client-side input validation","1. User is on forms/input fields
+2. Various invalid inputs prepared","1. Enter invalid email formats
+2. Submit forms with missing fields
+3. Enter special characters
+4. Test field length limits
+5. Observe validation behavior","1. Invalid inputs are rejected
+2. Validation messages are clear
+3. Valid inputs are accepted
+4. Field restrictions are enforced
+5. User can correct and resubmit","Input validation works correctly","Invalid inputs: test@, <script>, very long strings","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",12
+
+TC_INTEG_001,Integration,Auth0 Integration,Critical,"Test Auth0 authentication service integration","1. Auth0 service is configured
+2. Application is connected to Auth0","1. Test login flow end-to-end
+2. Verify token handling
+3. Test session management
+4. Check user profile data
+5. Test logout process","1. Auth0 integration works seamlessly
+2. Tokens are handled securely
+3. User data is retrieved correctly
+4. Session management is proper
+5. Logout clears Auth0 session","Auth0 integration is fully functional","Auth0 test tenant configuration","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",20
+
+TC_INTEG_002,Integration,AI Chat Service Integration,High,"Test integration with AI chat backend service","1. AI service is running
+2. Chat interface is available","1. Send various message types
+2. Test different query formats
+3. Verify response handling
+4. Test error scenarios
+5. Check service availability","1. AI service responds correctly
+2. Different query types are handled
+3. Responses are formatted properly
+4. Service errors are managed
+5. Fallback behavior exists","AI service integration works properly","Various query types and formats","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",25
+
+TC_INTEG_003,Integration,File Processing Service,High,"Test file upload and processing integration","1. File processing service is active
+2. Various file types available","1. Upload different file types
+2. Test file processing workflow
+3. Verify analysis results
+4. Test large file handling
+5. Check processing status","1. Files are processed correctly
+2. Analysis results are accurate
+3. Processing status is communicated
+4. Large files are handled efficiently
+5. Errors are reported clearly","File processing integration is complete","Various file types and sizes","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",30
+
+TC_DEPLOY_001,Deployment,Production Environment,Critical,"Test application in production environment","1. Application is deployed to production
+2. All services are configured","1. Access production URL
+2. Test all critical user flows
+3. Verify SSL certificates
+4. Check domain configuration
+5. Test under production load","1. Production deployment is successful
+2. All features work in production
+3. SSL/TLS encryption is active
+4. Domain configuration is correct
+5. Performance meets production SLA","Production deployment is verified","Production URL and credentials","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",45
+
+TC_DEPLOY_002,Deployment,Environment Configuration,Medium,"Verify different environment configurations","1. Multiple environments available (dev, staging, prod)
+2. Configuration differences documented","1. Test development environment
+2. Test staging environment
+3. Compare configurations
+4. Verify environment-specific features
+5. Check deployment consistency","1. Each environment works correctly
+2. Configurations are appropriate
+3. Environment-specific features work
+4. Deployment process is consistent
+5. No configuration conflicts","Environment configurations are validated","Dev, Staging, Production URLs","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",35
+
+TC_MAINT_001,Maintenance,Application Updates,Medium,"Test application behavior during updates","1. Application is running normally
+2. Update deployment process available","1. Note current application state
+2. Deploy application update
+3. Test functionality post-update
+4. Verify data persistence
+5. Check for regression issues","1. Updates deploy successfully
+2. Functionality remains intact
+3. User data is preserved
+4. No new bugs are introduced
+5. Performance is maintained","Application updates work smoothly","Update packages and deployment tools","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",30
+
+TC_MAINT_002,Maintenance,Database Maintenance,Medium,"Test application during database maintenance","1. Database maintenance can be simulated
+2. Application is connected to database","1. Perform database maintenance
+2. Test application during maintenance
+3. Verify graceful degradation
+4. Check recovery after maintenance
+5. Test data consistency","1. Maintenance mode is handled gracefully
+2. Users are informed of maintenance
+3. Data integrity is maintained
+4. Application recovers properly
+5. No data loss occurs","Database maintenance is handled properly","Database maintenance procedures","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",25
+
+TC_BACKUP_001,Backup & Recovery,Data Backup Verification,High,"Test data backup and recovery processes","1. Backup system is configured
+2. Test data is available","1. Create test data
+2. Trigger backup process
+3. Simulate data loss
+4. Restore from backup
+5. Verify data integrity","1. Backup process completes successfully
+2. All data is backed up
+3. Restore process works correctly
+4. Data integrity is maintained
+5. Recovery time is acceptable","Backup and recovery system works","Test data sets for backup","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",40
+
+TC_BACKUP_002,Backup & Recovery,Disaster Recovery,Critical,"Test full disaster recovery procedures","1. Disaster recovery plan is available
+2. Alternative infrastructure is prepared","1. Simulate complete system failure
+2. Execute disaster recovery plan
+3. Restore services and data
+4. Verify full functionality
+5. Test user access restoration","1. Disaster recovery plan executes successfully
+2. Services are restored within RTO
+3. Data is recovered within RPO
+4. Full functionality is available
+5. Users can access system normally","Disaster recovery capability is proven","Disaster recovery infrastructure","Chrome, Firefox, Safari, Edge","Desktop, Mobile, Tablet",120
