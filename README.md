@@ -1,6 +1,6 @@
-# AI Knowledge Chat UI - E2E Test Automation
+# Omnipulse Chat UI - E2E Test Automation
 
-This project contains end-to-end test automation for the AI Knowledge Chat UI application, with a focus on Gmail SSO authentication testing using Playwright and TypeScript.
+This project contains end-to-end test automation for the Omnipulse Chat UI application, with a focus on Gmail SSO authentication testing using Playwright and TypeScript.
 
 ## 🏗️ Project Structure
 
